@@ -1,0 +1,450 @@
+html,body{
+    background: #ececec;
+}
+#app{
+    .page{
+        color: #333;
+        
+        .header{
+            font-size: 0;
+            img{
+                width: 100%;
+            }
+        }
+        .main{
+            padding-bottom: 60px;
+            overflow: hidden;
+            background: #fff;
+            .money{
+                text-align: center;
+                .title{
+                    font-size: 22px;
+                    margin-top: 10px;
+                }
+                .num{
+                    font-size: 22px;
+                    margin: 6px 0;
+                }
+            }
+            .step{
+                // padding: 0 10px;
+                display: flex;
+                align-items: center;
+                .step-btn{
+                    flex: 0 0 28px;
+                    height: 28px;
+                    border: solid 2px #f4866c;
+                    border-radius: 50%;
+                    line-height: 32px;
+                    text-align: center;
+                    font-size: 0;
+                    margin:0 10px;
+                    font-weight: bold;
+                    img{
+                        width: 100%;
+                    }
+                    
+                    
+                }
+                .step-con{
+                    flex: 1;
+                    padding: 0 10px;
+                    .custom-button{
+                        width: 46px;
+                        height: 46px;
+                        font-size: 0;
+                        transition: all .5s;
+                        img{
+                            width: 100%;
+                        }
+                        
+                    }
+                }
+            }
+            .term{
+                .title{
+                    font-size: 18px;
+                    padding: 18px 10px 0px;
+                }
+                .term-con{
+                    padding: 5px;
+                    border-bottom: solid 1px #eee;
+                    .con-padding{
+
+                        display: flex;
+                        .term-btn{
+                            flex: 1;
+                            text-align: center;
+                            font-size: 16px;
+                            color: #999;
+                            background: #eee;
+                            border-radius: 4px;
+                            line-height: 20px;
+                            padding: 4px;
+                            margin: 5px;
+                            &.active{
+                                color: #fff;
+                                background: #f4866c;
+                            }
+                        }
+                    
+                    }
+                }
+                .repayment{
+                    display: flex;
+                    padding: 10px;
+                    align-items: center;
+                    border-bottom: solid 1px #eee;
+                    .lt{
+                        flex: 0 0 80px;
+                        font-size: 18px;
+                    }
+                    .rt{
+                        flex: 1;
+                        text-align: right;
+                        .mount{
+                            font-size: 16px;
+                        }
+                        .point{
+                            font-size: 14px;
+                            color: #999;
+                        }
+                    }
+                }
+            }
+            .agreement{
+                margin: 10px;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                &.active{
+                    .icon{
+                       background: #f4866c; 
+                       border-color: chocolate;
+
+                    }
+                }
+                .icon{
+                    display: inline-block;
+                    height: 14px;
+                    width: 14px;
+                    text-align: center;
+                    line-height: 14px;
+                    border: solid 1px #ccc;
+                    margin-right: 6px;
+                    background: #eee;
+                    border-radius: 2px;
+                    float: left;
+                    .van-icon{
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: #fff;
+                    }
+                }
+                .agree{
+                    padding: 0 6px 0 0px;
+                    overflow: hidden;
+                    
+                }
+                .text{
+                    color: sandybrown;
+                }
+            }
+            .btn-sub{
+                margin: 10px 10px 10px;
+                height: 48px;
+                background: #f4866c;
+                color: #fff;
+                text-align: center;
+                line-height: 48px;
+                font-size: 18px;
+                border-radius: 4px;
+            }
+            &.login{
+                padding-bottom: 260px;
+                .btn-sub{
+                    margin: 20px;
+                }
+                .toRegister{
+                    text-align: right;
+                    padding: 10px 30px;
+                    font-size: 14px;
+                    span{
+                        color: #f4866c;
+                    }
+                }
+                .item{
+                    margin: 20px 20px 0;
+                    display: flex;
+                    align-items: center;
+                    background: #eee;
+                    padding: 8px ;
+                    border-radius: 4px;
+                    .icon{
+                        flex: 0 0 24px;
+                        font-size: 0;
+                        margin-right: 10px;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .input-con{
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        input{
+                            flex: 1;
+                            border: 0;
+                            outline: none;
+                            background: transparent;
+                        }
+                        .eyes{
+                            font-size: 18px;
+                            color: #f4866c;
+                        }
+                    }
+                    .img{
+                        flex: 0 0 80px;
+                        font-size: 0;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            &.user{
+                // background: #eee;
+                padding-bottom: 0;
+                .user-header{
+                    background: #f4866c;
+                    overflow: hidden;
+                    padding-bottom: 20px;
+                    .img-con{
+                        width: 120px;
+                        margin: 30px auto 10px;
+                        font-size: 0;
+                        img{
+                            width: 100%;
+                            background: #fff;
+                            border-radius: 50%;
+                        }
+                        
+                        .phone{
+                            font-size: 16px;
+                            text-align: center;
+                            margin-top: 6px;
+                            color: #fff;
+                        }
+                    }
+                }
+                .wrapper{
+                    margin-top: 10px;
+                    background: #ececec;
+                    .line{
+                        height: 10px;
+                    }
+                    .van-cell{
+                        align-items: center;
+                        border-bottom: solid 1px #eee;
+                        &:after{
+                            display: none;
+                        }
+                        .item-icon{
+                            width: 30px;
+                            height: 30px;
+                            font-size: 0;
+                            margin-right: 10px;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .van-cell__title{
+                            display: flex;
+                            align-items: center;
+                            font-size: 16px;
+                            color: #999;
+                        }
+                        .van-icon{
+                            font-size: 24px;
+                            color: #ccc;
+                        }
+                        .item-title{
+                            .con{
+                                .up{
+                                    color: #666;
+                                    font-size: 16px;
+                                }
+                                .text{
+                                    color: #999;
+                                    font-size: 14px;
+                                    line-height: 16px;
+                                }
+                            }
+                        }
+                        .van-cell__value--alone{
+                            text-align: right;
+                            color: coral;
+                        }
+                    }
+                }
+            }
+            &.user-data{
+                background: transparent;
+                .title{
+                    text-align: center;
+                    background: transparent;
+                    padding-top: 10px;
+                    font-size: 14px;
+                    color: #999;
+                }
+                .wrapper .van-cell .item-icon{
+                    width: 36px;
+                    height: 36px;
+                }
+                .btn-sub{
+                    margin: 20px 20px;
+                }
+            }
+            &.person-data{
+                .title{
+                    text-align: left;
+                    font-size: 18px;
+                    color: #999;
+                    padding: 10px 15px 2px;
+                }
+                .wrapper{
+                    margin-top: 0px;
+                    .workTime{
+                        display: flex;
+                        align-items: center;
+                        color: #666;
+                        .year{
+                            margin-left: 6px;
+                        }
+                        .van-stepper{
+                            
+                        }
+                        .van-stepper__input{
+                            font-size: 16px;
+                            height: 26px;
+                            line-height: 26px;
+                            color: #666;
+                        }
+                    }
+                    .van-cell {
+                        .van-cell__value{
+                            font-size: 16px;
+                            .van-field__control{
+                                // text-align: right;
+                            }
+                        }
+                        .van-cell__title{
+                            max-width: 90px;
+                        }
+                        .van-cell__value{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+        &.photo{
+            background: #fff;
+            .main{
+                .wrapper{
+                    background: #fff;
+                    padding-top: 0;
+                    .photoItem{
+                        background: #ececec;
+                        border-radius: 6px;
+                        margin: 20px 48px;
+                        padding: 20px 40px;
+                        .img-show{
+                            font-size: 0;
+                            position: relative;
+                            
+                            img{
+                                width: 100%;
+                                border-radius: 5px;
+
+                            }
+                            .mask{
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 8px;
+                                background-color: #666 !important;
+                            }
+                            .delete{
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                padding: 5px;
+                                font-size: 24px;
+                                transform: translate(50%,-50%);
+                                color: #f4866c;
+                            }
+                        }
+                        .upload-con{
+                            .upload-img-block{
+                                font-size: 0;
+                                img{
+                                    width: 100%;
+                                }
+                                
+                            }
+                        }
+                        .text{
+                            font-size: 16px;
+                            text-align: center;
+                            margin-top: 10px;
+                            color: #666;
+                        }
+                    }
+                    .example{
+                        
+                        .example-title{
+                            font-size: 18px;
+                            padding: 10px 20px 0 16px;
+                        }
+                        .example-img{
+                            font-size: 0;
+                            padding: 0 10px;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                    }
+                    .btn-sub{
+                        margin: 30px 16px 40px;
+                    }
+                }
+            }
+        }
+        .van-nav-bar{
+            background: #f4866c;
+            .van-nav-bar__left{
+                .van-icon{
+
+                    font-size: 24px;
+                    color: #fff;
+                }
+            }
+            .van-nav-bar__title{
+                color: #fff;
+                font-size: 18px;
+            }
+        }
+    }
+    .van-tabbar{
+        height: 58px;
+    }
+    .van-tabbar-item{
+        font-size: 16px;
+    }
+    .van-tabbar-item__icon img{
+        height: 24px;
+    }
+}
