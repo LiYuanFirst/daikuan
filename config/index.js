@@ -11,8 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/SNGF.WXSuite':{
-        target:'http://118.25.2.174:8080'
+      '/':{
+        target:'http://www.qjlei.cn:1314'
       }
     },
 

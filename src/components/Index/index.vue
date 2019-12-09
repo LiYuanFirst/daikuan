@@ -6,12 +6,12 @@
     <div class="main">
       <div class="money">
         <div class="title">申请金额(元)</div>
-        <div class="num">10000.00</div>
+        <div class="num">{{loanAmount}}</div>
       </div>
       <div class="step">
         <div class="step-btn jian"><img src="@/assets/img/jian.png" alt=""></div>
         <div class="step-con">
-          <van-slider v-model="value" :step="5" bar-height="20px" active-color="#f9b5a5" :min="5">
+          <van-slider v-model="stepNum" :step="5" bar-height="20px" active-color="#f9b5a5" :min="5">
           <div
             slot="button"
             class="custom-button"
@@ -35,8 +35,8 @@
         <div class="repayment">
           <div class="lt">每期还款</div>
           <div class="rt">
-            <span class="mount">900.00元</span>
-            <span class="point">（含日利率0.0333%,，￥68.00元）</span>
+            <span class="mount">{{repayment}}元</span>
+            <span class="point">（含年利率12%,，￥{{interest}}元）</span>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
   name: "Index",
   data() {
     return {
-      value:20,
+      stepNum:5,
       active: 0,
       isAgreen:true,
       stages:6,
@@ -85,6 +85,30 @@ export default {
       this.stages = month
     }
   },
-  mounted() {}
+  mounted() {
+    
+  },
+  watch:{
+    
+  },
+  computed:{
+    loanAmount(){
+      return (this.stepNum*2000).toFixed(2)
+    },
+    repayment(){
+      let amountTotal = parseInt(this.loanAmount) *112/100 
+      let stages = this.stages
+      let amountMonth = amountTotal/stages
+      console.log(stages)
+      return (Math.round(amountMonth*100))/100
+    },
+    interest(){
+      let amountTotal = parseInt(this.loanAmount) *12/100 
+      let stages = this.stages
+      let amountMonth = amountTotal/stages
+      console.log(stages)
+      return (Math.round(amountMonth*100))/100
+    }
+  }
 };
 </script>

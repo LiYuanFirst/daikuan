@@ -5,7 +5,14 @@
       <img src="@/assets/img/loanHeader.png" alt="">
       
     </div>
-    <div class="card">
+    <div class="noData" v-show="!isShow">
+      <div class="img-con">
+        <img src="@/assets/img/noLoan.png" alt="">
+      </div>
+      <div class="text">您还未提交任何借款申请哦！</div>
+      <div class="btn-sub" @click="toApply">立即申请</div>
+    </div>
+    <div class="card" v-show="isShow">
       <div class="item">
         <div class="lt">审批额度</div>
         <div class="tt">500000.00元 </div>
@@ -33,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="btn-sub">我知道了</div>
+    <div class="btn-sub" v-show="isShow">我知道了</div>
   </div>
 </template>
 
@@ -44,11 +51,13 @@ export default {
   name: "Loan",
   data() {
     return {
-      
+      isShow:false
     };
   },
   methods: {
-    
+    toApply(){
+      this.$router.push({path:'/index'})
+    }
   },
   mounted() {}
 };

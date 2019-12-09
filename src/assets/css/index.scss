@@ -424,7 +424,20 @@ html,body{
             }
         }
         &.loan{
-            .header{
+            .noData{
+                .img-con{
+                    margin: 20px auto;
+                    width: 120px;
+                    font-size: 0;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .text{
+                    text-align: center;
+                    font-size: 18px;
+                    color: #999;
+                }
             }
             .card{
                 margin: -40px 20px;

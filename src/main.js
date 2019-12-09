@@ -8,6 +8,15 @@ import 'vant/lib/index.css'
 import router from './router'
 Vue.config.productionTip = false
 Vue.use(Vant)
+// 验证手机号码
+Vue.prototype.checkPhoneNum = function (inputString) {
+  var partten = /^1\d{10}$/;
+  if (partten.test(inputString)) {
+    return true;
+  }else {
+    return false;
+  }
+}
 // 验证input内容(不能包含空格)
 Vue.prototype.checkInputStr = function (str) {
   if (str.length == 0) {
