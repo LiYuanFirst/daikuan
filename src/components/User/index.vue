@@ -10,12 +10,12 @@
         
       </div>
       <div class="wrapper">
-        <van-cell title="我的资料" is-link @click="toUserCenter">
+        <van-cell title="我的资料" is-link to="/userCenter">
           <div slot="icon" class="item-icon">
             <img src="@/assets/img/gerenziliao.png" alt="">
           </div>
         </van-cell>
-        <van-cell title="我的借款" is-link >
+        <van-cell title="我的借款" is-link to="/loan">
           <div slot="icon" class="item-icon">
             <img src="@/assets/img/jiekuan.png" alt="">
           </div>

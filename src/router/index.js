@@ -21,6 +21,10 @@ export default new Router({
       name: 'UserCenter',
       component: () => import('@/components/UserCenter')
     },{
+      path: '/loan',
+      name: 'Loan',
+      component: () => import('@/components/Loan')
+    },{
       path: '/userData',
       name: 'UserData',
       component: () => import('@/components/UserData')
