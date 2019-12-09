@@ -3,9 +3,7 @@
       
     <div class="header">
       <img src="@/assets/img/loanHeader.png" alt="">
-      <div class="turn-left">
-          <van-icon name="arrow-left" />
-      </div>
+      
     </div>
     <div class="card">
       <div class="item">
