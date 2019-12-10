@@ -109,6 +109,7 @@ export default {
           Toast.clear()
           if(res.data.retCode==0){
             localStorage.setItem('userCode',res.data.data.userCode)
+            
             this.$router.replace({path:'/index'})
           }else{
             this.changeImgCode()

@@ -5,7 +5,7 @@
 
         <div class="img-con">
           <img src="@/assets/img/icon_portrait.png" alt="">
-          <div class="phone">{{0}}</div>
+          <div class="phone">{{userName}}</div>
         </div>
         
       </div>
@@ -43,12 +43,15 @@
 
 <script>
 import axios from "axios";
+
+import qs from "qs";
 import { Toast, Dialog } from 'vant';
 export default {
   name: "User",
   data() {
     return {
       userCode:'',
+      userName:"",
       isLogin:'',
       active: 1,
       headerImg:require("@/assets/img/bg_portrait.png"),
@@ -73,6 +76,7 @@ export default {
         title: '提示',
         message: '确认退出？',
       }).then(()=>{
+        localStorage.removeItem('userCode')
         this.$router.push({path:'/index'})
       }).catch(()=>{
 
@@ -80,13 +84,37 @@ export default {
     },
     toUserCenter(){
       this.$router.push({path:'/userCenter'})
-    }
+    },
+    queryData() {
+        let data = {
+          userCode: localStorage.getItem('userCode')
+        }
+        Toast.loading({
+          duration: 0,
+          message: '加载中...',
+          forbidClick: true
+        });
+        axios.post('/user/findUserLoginInfo', qs.stringify(data)).then((res) => {
+          console.log(res)
+          Toast.clear()
+          if (res.data.retCode == 0) {
+            this.userName = res.data.data.userName
+          } else {
+            Toast.fail('服务器出错');
+          }
+
+        }).catch(() => {
+
+          Toast.clear()
+          Toast.fail('服务器出错');
+        })
+      }
   },
   mounted() {
     if(localStorage.getItem('userCode')){
       this.userCode = localStorage.getItem('userCode')
       this.isLogin = true
-      
+      this.queryData()
     }else{
       this.isLogin = false
       Dialog.confirm({
