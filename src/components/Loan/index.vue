@@ -15,23 +15,27 @@
     <div class="card" v-show="isShow">
       <div class="item">
         <div class="lt">审批额度</div>
-        <div class="tt">500000.00元 </div>
+        <div class="tt">{{applyAmount}}元 </div>
       </div>
       <div class="item">
-        <div class="lt">审批期限</div>
-        <div class="tt">36月</div>
+        <div class="lt">还款期数</div>
+        <div class="tt">{{lifeLoan}}个月</div>
       </div>
       <div class="item">
-        <div class="lt">月利率</div>
-        <div class="tt">7.00%</div>
+        <div class="lt">每期还款</div>
+        <div class="tt">{{eachPayment}}元/月</div>
       </div>
       <div class="item">
-        <div class="lt">合同有效期</div>
-        <div class="tt">20190504—20190504</div>
+        <div class="lt">年利率</div>
+        <div class="tt">12.00%</div>
+      </div>
+      <div class="item">
+        <div class="lt">申请时间</div>
+        <div class="tt">{{createDate.slice(0,10)}}</div>
       </div>
       <div class="item">
         <div class="lt">发放卡号</div>
-        <div class="tt">62172099234276643984</div>
+        <div class="tt">{{bankNo}}</div>
       </div>
       <div class="item">
         <div class="lt">申请状态</div>
@@ -46,12 +50,21 @@
 
 <script>
 import axios from "axios";
+  import qs from "qs";
+  import { ActionSheet, Toast, Dialog } from 'vant';
 
 export default {
   name: "Loan",
   data() {
     return {
-      isShow:true
+      isShow:true,
+      codeKey:'',
+      applyAmount:'',
+      bankNo:'',
+      createDate:'',
+      eachPayment:'',
+      lifeLoan:'',
+
     };
   },
   methods: {
@@ -60,8 +73,53 @@ export default {
     },
     toApply(){
       this.$router.push({path:'/index'})
+    },
+    queryData() {
+      let data = {
+        userCode: localStorage.getItem("userCode")
+      };
+      Toast.loading({
+        duration: 0,
+        message: "加载中...",
+        forbidClick: true
+      });
+      axios
+        .post("loan/findUserLoan", qs.stringify(data))
+        .then(res => {
+          console.log(res);
+          Toast.clear();
+          if (res.data.retCode == 0) {
+            this.applyAmount = res.data.data.applyAmount
+            this.bankNo = res.data.data.bankNo
+            this.codeKey = res.data.data.codeKey
+            this.createDate = res.data.data.createDate
+            this.eachPayment = res.data.data.eachPayment
+            this.lifeLoan = res.data.data.lifeLoan
+            this.modifyDate = res.data.data.modifyDate
+          }
+        })
+        .catch(() => {
+          Toast.clear();
+          Toast.fail("服务器出错");
+        });
     }
   },
-  mounted() {}
+  mounted() {
+    if(localStorage.getItem('userCode')){
+      this.userCode = localStorage.getItem('userCode')
+      this.queryData()
+    }else{
+      Dialog.confirm({
+              title: '提示',
+              message: '暂未登录，请先登录',
+              confirmButtonText:'立即登录',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
+            }).catch(()=>{
+              this.$router.go(-1)
+            })
+    }
+  }
 };
 </script>

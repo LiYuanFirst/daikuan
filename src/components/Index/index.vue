@@ -60,6 +60,7 @@
 
 <script>
 import axios from "axios";
+  import qs from "qs";
 import { Toast, Dialog } from 'vant';
 export default {
   name: "Index",
@@ -117,7 +118,104 @@ export default {
             })
           return
       }
+      this.getBaseData()
+    },
+    getBaseData(){
+      let data = {
+          userCode: localStorage.getItem('userCode')
+        }
+        Toast.loading({
+          duration: 0,
+          message: '加载中...',
+          forbidClick: true
+        });
+        axios.post('/info/findUserInfo', qs.stringify(data)).then((res) => {
+          console.log(res)
+          Toast.clear()
+          if (res.data.retCode == 0) {
+            let json = {
+                userCode:localStorage.getItem('userCode'),
+                lifeLoan:this.stages,
+                applyAmount:this.loanAmount,
+                eachPayment:this.repayment,
+                bankNo:res.data.data.bankNo
+              }
+              let data = {
+                json: JSON.stringify(json)
+              }
+              this.doApply(data);
+
+              return
+            if(res.data.data.idcardBack&&res.data.data.idcardFn&&res.data.data.idcardHand){
+              let json = {
+                userCode:localStorage.getItem('userCode'),
+                lifeLoan:this.stages,
+                applyAmount:this.loanAmount,
+                eachPayment:this.interest,
+                bankNo:res.data.data.bankNo
+              }
+              let data = {
+                json: JSON.stringify(json)
+              }
+              this.doApply(data);
+            }else{
+              Dialog.confirm({
+                title: '提示',
+                message: '请先上传个人证照',
+                confirmButtonText:'立即上传',
+                confirmButtonColor:'#f4866c'
+              }).then(() => {
+                this.$router.push({path:'/userPhotoUpload'})
+              })
+            }
+          } else {
+            Dialog.confirm({
+              title: '提示',
+              message: '请完善个人信息后再申请',
+              confirmButtonText:'立即上传',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/userCenter'})
+            })
+          }
+
+        }).catch(() => {
+
+          Toast.clear()
+          Toast.fail('服务器出错');
+        })
+    },
+    doApply(data){
+        Toast.loading({
+          duration: 0,
+          message: '加载中...',
+          forbidClick: true
+        });
+        axios.post('/loan/insertUserLoan', qs.stringify(data)).then((res) => {
+          console.log(res)
+          Toast.clear()
+          if(res.data.retCode==0){
+            Dialog.alert({
+              title: '提示',
+              message: '申请成功，请耐心等待工作人员审核',
+              confirmButtonText:'确认',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/user'})
+            })
+          }else{
+            Dialog.alert({
+              title: '提示',
+              message: '提交失败，请稍后重试',
+              confirmButtonText:'确认',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+
+            })
+          }
+        })
     }
+
   },
   mounted() {
     if(localStorage.getItem('userCode')){
