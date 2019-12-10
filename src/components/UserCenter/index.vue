@@ -43,7 +43,8 @@ export default {
   name: "UserCenter",
   data() {
     return {
-      
+      userCode:'',
+      isLogin:false,
     };
   },
   methods: {
@@ -64,6 +65,13 @@ export default {
       })
     }
   },
-  mounted() {}
+  mounted() {
+    if(localStorage.getItem('userCode')){
+      this.userCode = localStorage.getItem('userCode')
+      this.isLogin = true
+    }else{
+      this.isLogin = false
+    }
+  }
 };
 </script>

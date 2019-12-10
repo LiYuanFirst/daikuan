@@ -1,11 +1,11 @@
 <template>
   <div class="page">
     <div class="main user">
-      <div class="user-header" @click="toLogin" :style="'background:url('+headerImg+') center center no-repeat;background-size:100% 100%;'">
+      <div class="user-header" :style="'background:url('+headerImg+') center center no-repeat;background-size:100% 100%;'">
 
         <div class="img-con">
           <img src="@/assets/img/icon_portrait.png" alt="">
-          <div class="phone">立即登录</div>
+          <div class="phone">{{0}}</div>
         </div>
         
       </div>
@@ -21,7 +21,7 @@
           </div>
         </van-cell>
         <div class="line"></div>
-        <van-cell title="退出登录" is-link @click="loginOut">
+        <van-cell title="退出登录" is-link @click="loginOut" v-show="isLogin">
           <div slot="icon" class="item-icon">
             <img src="@/assets/img/tuichu.png" alt="">
           </div>
@@ -43,11 +43,13 @@
 
 <script>
 import axios from "axios";
-
+import { Toast, Dialog } from 'vant';
 export default {
   name: "User",
   data() {
     return {
+      userCode:'',
+      isLogin:'',
       active: 1,
       headerImg:require("@/assets/img/bg_portrait.png"),
       icon: [
@@ -80,6 +82,24 @@ export default {
       this.$router.push({path:'/userCenter'})
     }
   },
-  mounted() {}
+  mounted() {
+    if(localStorage.getItem('userCode')){
+      this.userCode = localStorage.getItem('userCode')
+      this.isLogin = true
+      
+    }else{
+      this.isLogin = false
+      Dialog.confirm({
+              title: '提示',
+              message: '暂未登录，请先登录',
+              confirmButtonText:'立即登录',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
+            }).catch(()=>{
+              this.$router.go(-1)
+            })
+    }
+  }
 };
 </script>

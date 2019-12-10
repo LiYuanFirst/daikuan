@@ -91,6 +91,8 @@ export default {
   name: "User",
   data() {
     return {
+      userCode:'',
+      isLogin:false,
       fileFont:{
         isRead:false,
         baseData:'',
@@ -141,6 +143,13 @@ export default {
       this.fileHold.isRead = true
     }
   },
-  mounted() {}
+  mounted() {
+    if(localStorage.getItem('userCode')){
+      this.userCode = localStorage.getItem('userCode')
+      this.isLogin = true
+    }else{
+      this.isLogin = false
+    }
+  }
 };
 </script>

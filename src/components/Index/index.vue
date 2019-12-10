@@ -9,7 +9,7 @@
         <div class="num">{{loanAmount}}</div>
       </div>
       <div class="step">
-        <div class="step-btn jian"><img src="@/assets/img/jian.png" alt=""></div>
+        <div class="step-btn jian" @click="reduce"><img src="@/assets/img/jian.png" alt=""></div>
         <div class="step-con">
           <van-slider v-model="stepNum" :step="5" bar-height="20px" active-color="#f9b5a5" :min="5">
           <div
@@ -21,7 +21,7 @@
           
         </van-slider>
         </div>
-        <div class="step-btn add"><img src="@/assets/img/add.png" alt=""></div>
+        <div class="step-btn add" @click="add"><img src="@/assets/img/add.png" alt=""></div>
       </div>
       <div class="term">
         <div class="title">借款期限</div>
@@ -43,7 +43,7 @@
       <div class="agreement" :class="isAgreen?'active':''">
         <span class="icon" @click="toggleAgreen"><van-icon name="success" /></span><span class="agree" @click="toggleAgreen">同意</span><span class="text">《借款协议》</span>
       </div>
-      <div class="btn-sub">立即申请</div>
+      <div class="btn-sub" @click="sub">立即申请</div>
     </div>
     <van-tabbar v-model="active" active-color="#f4866c">
       <van-tabbar-item>
@@ -60,13 +60,16 @@
 
 <script>
 import axios from "axios";
+import { Toast, Dialog } from 'vant';
 export default {
   name: "Index",
   data() {
     return {
-      stepNum:5,
+      stepNum:90,
       active: 0,
       isAgreen:true,
+      userCode:'',
+      isLogin:false,
       stages:6,
       icon: [{
         active: require('@/assets/img/icon_home_selected.png'),
@@ -83,9 +86,46 @@ export default {
     },
     choseMonth(month){
       this.stages = month
+    },
+    add(){
+      console.log(this.stepNum)
+      if(this.stepNum<100){
+        this.stepNum+=5
+      }else{
+        return
+      }
+    },
+    reduce(){
+      console.log(this.stepNum)
+      if(this.stepNum>5){
+        this.stepNum-=5
+      }
+    },
+    sub(){
+      if(!this.isAgreen){
+        Toast.fail('请先阅读并同意《借款协议》');
+          return
+      }
+      if(!this.isLogin){
+        Dialog.confirm({
+              title: '提示',
+              message: '请先登录，并完善个人信息',
+              confirmButtonText:'立即登录',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
+            })
+          return
+      }
     }
   },
   mounted() {
+    if(localStorage.getItem('userCode')){
+      this.userCode = localStorage.getItem('userCode')
+      this.isLogin = true
+    }else{
+      this.isLogin = false
+    }
     
   },
   watch:{
@@ -99,14 +139,12 @@ export default {
       let amountTotal = parseInt(this.loanAmount) *112/100 
       let stages = this.stages
       let amountMonth = amountTotal/stages
-      console.log(stages)
       return (Math.round(amountMonth*100))/100
     },
     interest(){
       let amountTotal = parseInt(this.loanAmount) *12/100 
       let stages = this.stages
       let amountMonth = amountTotal/stages
-      console.log(stages)
       return (Math.round(amountMonth*100))/100
     }
   }

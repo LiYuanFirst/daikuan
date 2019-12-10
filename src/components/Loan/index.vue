@@ -1,6 +1,6 @@
 <template>
   <div class="page loan">
-      
+    <van-nav-bar title="贷款信息" left-arrow @click-left="onClickLeft" :border="false"/>
     <div class="header">
       <img src="@/assets/img/loanHeader.png" alt="">
       
@@ -55,6 +55,9 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     toApply(){
       this.$router.push({path:'/index'})
     }
