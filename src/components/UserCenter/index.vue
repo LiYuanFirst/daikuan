@@ -54,17 +54,6 @@ export default {
     toLogin() {
       this.$router.push({ path: "/login" });
     },
-    loginOut() {
-      this.$dialog
-        .confirm({
-          title: "提示",
-          message: "确认退出？"
-        })
-        .then(() => {
-          this.$router.push({ path: "/index" });
-        })
-        .catch(() => {});
-    },
     queryData() {
       let data = {
         userCode: localStorage.getItem("userCode")
@@ -88,6 +77,16 @@ export default {
             ) {
               this.val1 = "";
             }
+          }else if(res.data.retCode == 401){
+            localStorage.removeItem('userCode')
+            Dialog.alert({
+              title: '提示',
+              message: '你好，请先登录',
+              confirmButtonText:'立即登录',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
+            })
           }
         })
         .catch(() => {

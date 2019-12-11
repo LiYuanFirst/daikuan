@@ -99,14 +99,38 @@ export default {
           Toast.clear()
           if (res.data.retCode == 0) {
             this.userName = res.data.data.userName
+          }else if(res.data.retCode == 401){
+            localStorage.removeItem('userCode')
+            Dialog.alert({
+              title: '提示',
+              message: '你好，请先登录',
+              confirmButtonText:'立即登录',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
+            })
+          }else if(res.data.retCode == 400){
+            Toast.fail({
+              duration: 0,
+              message: '你好，你已被限制使用本网站',
+              forbidClick: true
+            })
           } else {
-            Toast.fail('服务器出错');
+            Toast.fail({
+              duration: 0,
+              message: '服务器出错',
+              forbidClick: true
+            });
           }
 
         }).catch(() => {
 
           Toast.clear()
-          Toast.fail('服务器出错');
+          Toast.fail({
+              duration: 0,
+              message: '服务器出错',
+              forbidClick: true
+            });
         })
       }
   },
