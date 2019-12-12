@@ -30,10 +30,16 @@
         <van-field v-model="bankName" label="所属银行" :disabled="isDisabled" placeholder="请输入所属银行" />
         <van-field v-model="bankDeposit" label="开户行" :disabled="isDisabled" placeholder="请输入开户行" />
       </div>
-      <div class="title">紧急联系人信息</div>
+      <div class="title">紧急联系人信息(直系亲属)</div>
       <div class="wrapper">
         <van-field v-model="contactName" :disabled="isDisabled" label="姓名" placeholder="请输入紧急联系人姓名" />
         <van-field v-model="contactMobile" label="手机号码" :disabled="isDisabled" type="tel" placeholder="请输入紧急联系人手机号码" />
+
+      </div>
+      <div class="title">紧急联系人信息(同事、朋友)</div>
+      <div class="wrapper">
+        <van-field v-model="contactPerson" :disabled="isDisabled" label="姓名" placeholder="请输入紧急联系人姓名" />
+        <van-field v-model="contactPersonMobile" label="手机号码" :disabled="isDisabled" type="tel" placeholder="请输入紧急联系人手机号码" />
 
         <div class="btn-sub" v-show="!isDisabled" @click="checkData">立即提交</div>
       </div>
@@ -70,7 +76,10 @@
         bankDeposit: "",
         contactName: '',
         contactMobile: '',
-        isDisabled: true
+        contactPerson:'',
+        contactPersonMobile: '',
+        isDisabled: true,
+
       };
     },
     methods: {
@@ -100,6 +109,8 @@
         let bankDepositCheck = this.checkInputStr(this.bankDeposit)
         let contactNameCheck = this.checkInputStr(this.contactName)
         let contactMobileCheck = this.checkPhoneNum(this.contactMobile)
+        let contactPersonCheck = this.checkInputStr(this.contactPerson)
+        let contactPersonMobileCheck = this.checkPhoneNum(this.contactPersonMobile)
         if(!nameCheck.status){
           Toast.fail('姓名'+nameCheck.msg);
           return
@@ -139,12 +150,21 @@
           return
         }
         if(!contactNameCheck.status){
-          Toast.fail('紧急联系人姓名'+contactNameCheck.msg);
+          Toast.fail('紧急联系人一姓名'+contactNameCheck.msg);
           return
         }
 
         if(!contactMobileCheck){
-          Toast.fail('紧急联系人手机号码有误');
+          Toast.fail('紧急联系人一手机号码有误');
+          return
+        }
+        if(!contactPersonCheck.status){
+          Toast.fail('紧急联系人二姓名'+contactNameCheck.msg);
+          return
+        }
+
+        if(!contactPersonMobileCheck){
+          Toast.fail('紧急联系人二手机号码有误');
           return
         }
         if(this.mobile==this.contactMobile){
@@ -172,6 +192,8 @@
           bankDeposit: this.bankDeposit,
           contactName: this.contactName,
           contactMobile: this.contactMobile,
+          contactPerson: this.contactPerson,
+          contactPersonMobile: this.contactPersonMobile,
           userCode: localStorage.getItem('userCode')
 
         }
@@ -225,7 +247,8 @@
             this.bankDeposit = data.bankDeposit
             this.contactName = data.contactName
             this.contactMobile = data.contactMobile
-
+            this.contactPerson = data.contactPerson
+            this.contactPersonMobile = data.contactPersonMobile
 
           } else {
             this.isDisabled = false
