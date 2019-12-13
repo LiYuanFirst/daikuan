@@ -40,11 +40,12 @@
       <div class="item">
         <div class="lt">申请状态</div>
         <div class="tt">
-          正在审核中
+          {{statusText}}
         </div>
       </div>
     </div>
-    <div class="btn-sub" v-show="isShow">我知道了</div>
+    <div class="btn-sub" @click="onClickLeft" v-show="status!=='pass'">我知道了</div>
+    <div class="btn-sub" @click="doChange" v-show="status=='pass'">立即申请放款</div>
   </div>
 </template>
 
@@ -64,6 +65,8 @@ export default {
       createDate:'',
       eachPayment:'',
       lifeLoan:'',
+      status:'',
+      statusText:''
 
     };
   },
@@ -73,6 +76,9 @@ export default {
     },
     toApply(){
       this.$router.push({path:'/index'})
+    },
+    doChange(){
+
     },
     queryData() {
       let data = {
@@ -96,6 +102,26 @@ export default {
             this.eachPayment = res.data.data.eachPayment
             this.lifeLoan = res.data.data.lifeLoan
             this.modifyDate = res.data.data.modifyDate
+            this.status = res.data.data.status
+            switch (res.data.data.status) {
+              case 'new':
+                this.statusText="贷款申请审核中"
+                break;
+              case 'refuce':
+                this.statusText="贷款审核未通过"
+                break;
+              case 'pass':
+                this.statusText="贷款审核已通过"
+                break;
+              case 'drawing':
+                this.statusText="放款申请已提交"
+                break;
+              case 'agree':
+                this.statusText="已放款"
+                break;
+            }
+          }else{
+            this.isShow = false
           }
         })
         .catch(() => {
