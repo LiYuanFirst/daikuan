@@ -10,7 +10,7 @@
         <van-field v-model="name" clearable label="姓名" :disabled="isDisabled" placeholder="请输入用户名" />
         <van-field v-model="mobile" type="tel" label="手机号码" :disabled="isDisabled" placeholder="请输入手机号码" />
         <van-cell title="性别" is-link :value="sex" @click="showSex" />
-        <van-field v-model="idcardNo" clearable label="身份证号" placeholder="请输入身份证号码" />
+        <van-field v-model="idcardNo" clearable label="身份证号" :disabled="isDisabled" placeholder="请输入身份证号码" />
         <van-field v-model="workName" label="工作单位" type="textarea" :disabled="isDisabled" rows="1" autosize
           placeholder="请输入工作单位" />
         <van-cell title="工作年限">
