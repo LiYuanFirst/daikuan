@@ -39,7 +39,7 @@
       </div>
       <div class="item">
         <div class="lt">申请状态</div>
-        <div class="tt">
+        <div class="tt" :class="{wraing:status=='refuse',pass:status=='pass'||status=='agree'}">
           {{statusText}}
         </div>
       </div>
@@ -78,7 +78,47 @@ export default {
       this.$router.push({path:'/index'})
     },
     doChange(){
-
+      Toast.loading({
+        duration: 0,
+        message: "提交中...",
+        forbidClick: true
+      });
+      let data = {
+            codeKey:this.codeKey,  
+            status:'drawing'
+          }
+        axios.post('/loan/modifyUserLoanStatus', qs.stringify(data)).then((res) => {
+            console.log(res)
+            
+            Toast.clear();
+            if (res.data.retCode == 0) {
+              Toast.success({
+                duration: 1500,
+                message: '提交成功！',
+                forbidClick: true
+              })
+              this.queryData()
+  
+            }else if(res.data.retCode == 401){
+              localStorage.removeItem('userCode')
+              Dialog.alert({
+                title: '提示',
+                message: '登录失效，请先登录',
+                confirmButtonText:'立即登录',
+                confirmButtonColor:'#f4866c'
+              }).then(() => {
+                this.$router.push({path:'/login'})
+              })
+            } else {
+              Toast.clear();
+          Toast.fail("服务器出错");
+              
+            }
+  
+          }).catch(() => {
+            Toast.clear();
+          Toast.fail("服务器出错");
+          })
     },
     queryData() {
       let data = {
@@ -107,7 +147,7 @@ export default {
               case 'new':
                 this.statusText="贷款申请审核中"
                 break;
-              case 'refuce':
+              case 'refuse':
                 this.statusText="贷款审核未通过"
                 break;
               case 'pass':

@@ -221,6 +221,15 @@ export default {
             }).then(() => {
               this.$router.push({path:'/user'})
             })
+          }else if(res.data.retCode==-1){
+            Dialog.alert({
+              title: '提示',
+              message: '您尚有未完成贷款，无法进行申请',
+              confirmButtonText:'确认',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+
+            })
           }else{
             Dialog.alert({
               title: '提示',
