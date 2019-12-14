@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/':{
-        target:'http://www.qjlei.cn:1314'
+        // target:'http://www.qjlei.cn:1314'
+        target:'http://192.168.1.119:1314'
       }
     },
 

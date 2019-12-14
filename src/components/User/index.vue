@@ -77,7 +77,7 @@ export default {
         message: '确认退出？',
       }).then(()=>{
         localStorage.removeItem('userCode')
-        this.$router.push({path:'/index'})
+        this.$router.push({path:'/login'})
       }).catch(()=>{
 
       })

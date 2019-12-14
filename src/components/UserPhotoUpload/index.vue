@@ -83,7 +83,7 @@
     name: "User",
     data() {
       return {
-        wwwUrl:'http://www.qjlei.cn:8080/',
+        wwwUrl:'/',
         userCode: '',
         actionUrl: '/info/insertUserInfo',
         isLogin: false,

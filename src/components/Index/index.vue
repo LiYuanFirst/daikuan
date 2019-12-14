@@ -133,7 +133,9 @@ export default {
           console.log(res)
           Toast.clear()
           if (res.data.retCode == 0) {
-            let json = {
+            
+            if(res.data.data.idcardBack&&res.data.data.idcardFn&&res.data.data.idcardHand){
+              let json = {
                 userCode:localStorage.getItem('userCode'),
                 lifeLoan:this.stages,
                 applyAmount:this.loanAmount,
@@ -143,20 +145,8 @@ export default {
               let data = {
                 json: JSON.stringify(json)
               }
-              this.doApply(data);
+              console.log(data)
 
-              return
-            if(res.data.data.idcardBack&&res.data.data.idcardFn&&res.data.data.idcardHand){
-              let json = {
-                userCode:localStorage.getItem('userCode'),
-                lifeLoan:this.stages,
-                applyAmount:this.loanAmount,
-                eachPayment:this.interest,
-                bankNo:res.data.data.bankNo
-              }
-              let data = {
-                json: JSON.stringify(json)
-              }
               this.doApply(data);
             }else{
               Dialog.confirm({

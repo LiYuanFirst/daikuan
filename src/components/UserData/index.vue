@@ -30,13 +30,13 @@
         <van-field v-model="bankName" label="所属银行" :disabled="isDisabled" placeholder="请输入所属银行" />
         <van-field v-model="bankDeposit" label="开户行" :disabled="isDisabled" placeholder="请输入开户行" />
       </div>
-      <div class="title">紧急联系人信息(直系亲属)</div>
+      <div class="title">紧急联系人(直系亲属)</div>
       <div class="wrapper">
         <van-field v-model="contactName" :disabled="isDisabled" label="姓名" placeholder="请输入紧急联系人姓名" />
         <van-field v-model="contactMobile" label="手机号码" :disabled="isDisabled" type="tel" placeholder="请输入紧急联系人手机号码" />
 
       </div>
-      <div class="title">紧急联系人信息(同事、朋友)</div>
+      <div class="title">紧急联系人(同事、朋友)</div>
       <div class="wrapper">
         <van-field v-model="contactPerson" :disabled="isDisabled" label="姓名" placeholder="请输入紧急联系人姓名" />
         <van-field v-model="contactPersonMobile" label="手机号码" :disabled="isDisabled" type="tel" placeholder="请输入紧急联系人手机号码" />
@@ -197,6 +197,7 @@
           userCode: localStorage.getItem('userCode')
 
         }
+        console.log(json)
         let data = {
           json: JSON.stringify(json)
         }

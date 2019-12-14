@@ -159,6 +159,9 @@ export default {
               case 'agree':
                 this.statusText="已放款"
                 break;
+              case 'end':
+                this.statusText="还款结束"
+                break;
             }
           }else{
             this.isShow = false
