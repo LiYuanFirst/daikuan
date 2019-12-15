@@ -37,7 +37,7 @@
           <input type="text" v-model="code" placeholder="请输入验证码">
         </div>
         <div class="img" @click="changeImgCode">
-          <img :src="'/user/getImgCode?'+timestamp" alt="">
+          <img :src="'/loanstreasure/user/getImgCode?'+timestamp" alt="">
         </div>
       </div>
       <div class="toRegister">
@@ -59,8 +59,8 @@ export default {
   data() {
     return {
       showPassword:false,
-      mobile:'15397236229',
-      password:"123456",
+      mobile:'',
+      password:"",
       code:'',
       timestamp: ''
     };
@@ -104,7 +104,7 @@ export default {
           password:this.password,
           userName:this.mobile
         }
-        axios.post('/user/login', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/user/login', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           if(res.data.retCode==0){

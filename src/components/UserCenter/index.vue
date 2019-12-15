@@ -64,7 +64,7 @@ export default {
         forbidClick: true
       });
       axios
-        .post("/info/findUserInfo", qs.stringify(data))
+        .post("/loanstreasure/info/findUserInfo", qs.stringify(data))
         .then(res => {
           console.log(res);
           Toast.clear();

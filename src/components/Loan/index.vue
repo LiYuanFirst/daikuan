@@ -44,8 +44,8 @@
         </div>
       </div>
     </div>
-    <div class="btn-sub" @click="onClickLeft" v-show="status!=='pass'">我知道了</div>
-    <div class="btn-sub" @click="doChange" v-show="status=='pass'">立即申请放款</div>
+    <div class="btn-sub" @click="onClickLeft" v-show="status!=='pass'&&isShow">我知道了</div>
+    <div class="btn-sub" @click="doChange" v-show="status=='pass'&&isShow">立即申请放款</div>
   </div>
 </template>
 
@@ -87,7 +87,7 @@ export default {
             codeKey:this.codeKey,  
             status:'drawing'
           }
-        axios.post('/loan/modifyUserLoanStatus', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/loan/modifyUserLoanStatus', qs.stringify(data)).then((res) => {
             console.log(res)
             
             Toast.clear();
@@ -130,7 +130,7 @@ export default {
         forbidClick: true
       });
       axios
-        .post("loan/findUserLoan", qs.stringify(data))
+        .post("/loanstreasure/loan/findUserLoan", qs.stringify(data))
         .then(res => {
           console.log(res);
           Toast.clear();

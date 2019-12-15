@@ -129,7 +129,7 @@ export default {
           message: '加载中...',
           forbidClick: true
         });
-        axios.post('/info/findUserInfo', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/info/findUserInfo', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           if (res.data.retCode == 0) {
@@ -199,7 +199,7 @@ export default {
           message: '加载中...',
           forbidClick: true
         });
-        axios.post('/loan/insertUserLoan', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/loan/insertUserLoan', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           if(res.data.retCode==0){

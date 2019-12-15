@@ -56,7 +56,7 @@
     name: "UserCenter",
     data() {
       return {
-        actionUrl:'/info/insertUserInfo',
+        actionUrl:'/loanstreasure/info/insertUserInfo',
         userCode: '',
         isLogin: false,
         showSexChose: false,
@@ -230,12 +230,12 @@
           message: '加载中...',
           forbidClick: true
         });
-        axios.post('/info/findUserInfo', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/info/findUserInfo', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           if (res.data.retCode == 0) {
             let data = res.data.data
-            this.actionUrl = '/info/modifyUserInfo'
+            this.actionUrl = '/loanstreasure/info/modifyUserInfo'
             this.name = data.name
             this.mobile = data.mobile
             this.sex = data.sex

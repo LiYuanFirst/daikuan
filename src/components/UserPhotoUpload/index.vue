@@ -83,9 +83,9 @@
     name: "User",
     data() {
       return {
-        wwwUrl:'/',
+        wwwUrl:'/loanstreasure/',
         userCode: '',
-        actionUrl: '/info/insertUserInfo',
+        actionUrl: '/loanstreasure/info/insertUserInfo',
         isLogin: false,
         name: null,
         mobile: null,
@@ -151,7 +151,7 @@
             let formData = new FormData()
             formData.append("file", val.blob)
             let config = { headers: { 'Content-Type': 'multipart/form-data' } }
-            axios.post("/fileUpload", formData, config).then(res => {
+            axios.post("/loanstreasure/fileUpload", formData, config).then(res => {
               let data = res.data;
               console.log(data)
               this.fileFont.baseData = data.data
@@ -187,7 +187,7 @@
             let formData = new FormData()
             formData.append("file", val.blob)
             let config = { headers: { 'Content-Type': 'multipart/form-data' } }
-            axios.post("/fileUpload", formData, config).then(res => {
+            axios.post("/loanstreasure/fileUpload", formData, config).then(res => {
               let data = res.data;
               console.log(data)
               this.fileBack.baseData = data.data
@@ -221,7 +221,7 @@
             let formData = new FormData()
             formData.append("file", val.blob)
             let config = { headers: { 'Content-Type': 'multipart/form-data' } }
-            axios.post("/fileUpload", formData, config).then(res => {
+            axios.post("/loanstreasure/fileUpload", formData, config).then(res => {
               let data = res.data;
               console.log(data)
               this.fileHold.baseData = data.data
@@ -246,13 +246,13 @@
           message: '加载中...',
           forbidClick: true
         });
-        axios.post('/info/findUserInfo', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/info/findUserInfo', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           //已有用户信息
           if (res.data.retCode == 0) {
             let data = res.data.data
-            this.actionUrl = '/info/modifyUserInfo'
+            this.actionUrl = '/loanstreasure/info/modifyUserInfo'
             this.name = data.name
             this.mobile = data.mobile
             this.sex = data.sex
@@ -342,7 +342,10 @@
               message: '提交成功！',
               forbidClick: true
             })
-            this.isDisabled = true
+            setTimeout(()=>{
+              this.$router.go(-1)
+              this.isDisabled = true
+            },1500)
           } else {
             Toast.fail('提交失败，请稍后重试');
           }

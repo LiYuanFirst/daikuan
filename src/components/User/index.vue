@@ -94,7 +94,7 @@ export default {
           message: '加载中...',
           forbidClick: true
         });
-        axios.post('/user/findUserLoginInfo', qs.stringify(data)).then((res) => {
+        axios.post('/loanstreasure/user/findUserLoginInfo', qs.stringify(data)).then((res) => {
           console.log(res)
           Toast.clear()
           if (res.data.retCode == 0) {
@@ -110,10 +110,13 @@ export default {
               this.$router.push({path:'/login'})
             })
           }else if(res.data.retCode == 400){
-            Toast.fail({
-              duration: 0,
+            Dialog.alert({
+              title: '提示',
               message: '你好，你已被限制使用本网站',
-              forbidClick: true
+              confirmButtonText:'确认',
+              confirmButtonColor:'#f4866c'
+            }).then(() => {
+              this.$router.push({path:'/login'})
             })
           } else {
             Toast.fail({
